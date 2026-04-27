@@ -779,6 +779,30 @@ html,body{overflow-x:hidden!important;max-width:100vw!important}
 </style>
 </head>
 <body>
+<style>
+/* ═══ MOBILE OVERFLOW FIX - ABSOLUTE ═══════════════════ */
+*{box-sizing:border-box!important}
+html{overflow-x:hidden!important;width:100%!important}
+body{overflow-x:hidden!important;width:100%!important;max-width:100vw!important}
+.ct{width:100%!important;max-width:100vw!important;overflow-x:hidden!important}
+.pn,.kc,.cc,.fn-card,.re-card,.eq-card,.ms-card{max-width:100%!important;overflow:hidden!important}
+.ph,.pb,.pt{max-width:100%!important;word-break:break-word!important}
+@media(max-width:767px){
+  .hero{grid-template-columns:1fr 1fr!important;gap:.5rem!important}
+  .g2,.g3,.g12,.pst,.cf-kpi,#fn-kpi,#ph-kpi{grid-template-columns:1fr!important;gap:.75rem!important}
+  .kv{font-size:1.5rem!important}
+  .dt{width:100%!important}
+  .tscr{max-width:100vw!important;overflow-x:auto!important}
+  pre,code{white-space:pre-wrap!important;word-break:break-all!important}
+  img,svg{max-width:100%!important;height:auto!important}
+  .sbar{flex-wrap:wrap!important;gap:.35rem!important}
+  .fn-vals{grid-template-columns:1fr 1fr!important}
+  .qr-layout{grid-template-columns:1fr!important}
+  .cf-form{grid-template-columns:1fr 1fr!important}
+  .cc-grid{grid-template-columns:1fr!important}
+  .stgr,.re-grid,.eq-grid{grid-template-columns:1fr!important}
+}
+</style>
 
 <!-- ── STAR FIELD ── -->
 <div id="starfield"></div>
