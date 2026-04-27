@@ -1451,7 +1451,7 @@ body::before {
           <div class="qr-panel">
             <div class="qr-pt">App URL &nbsp;<span style="font-size:.46rem;color:var(--silver2);font-weight:400">— paste your Netlify / hosted URL here</span></div>
             <div style="display:flex;gap:.5rem;align-items:center;margin-top:.55rem">
-              <input class="url-inp" id="custom-url" style="margin:0;flex:1" placeholder="https://lunaris-holdings-app.netlify.app" oninput="liveUpdateQR(this.value)">
+              <input class="url-inp" id="custom-url" style="margin:0;flex:1" placeholder="https://nbarbiero1986-hash.github.io/lunaris" oninput="liveUpdateQR(this.value)">
               <button class="sbtn" onclick="updateQR(document.getElementById('custom-url').value)" style="flex-shrink:0;white-space:nowrap">&#x21BB; Update</button>
             </div>
             <div id="qr-url-valid" style="font-size:.52rem;margin-top:.3rem;font-family:var(--mono-font,monospace);min-height:.85rem"></div>
@@ -1609,7 +1609,7 @@ function renderQR(){
   if(warn) warn.style.display=(isFile||isLocalhost)?'block':'none';
   var localEl=document.getElementById('qr-local-url');
   if(localEl){ var u=window.location.href; localEl.textContent=u.length>55?u.slice(0,52)+'\u2026':u; }
-  var qrUrl=saved&&saved.trim()?saved.trim():'https://lunaris-holdings-app.netlify.app';
+  var qrUrl=saved&&saved.trim()?saved.trim():'https://nbarbiero1986-hash.github.io/lunaris';
   genQR(qrUrl);
   validateQRUrl(qrUrl);
   var sg=document.getElementById('snap-g');
@@ -1620,7 +1620,7 @@ function renderQR(){
 }
 function updateQR(url){
   if(!url||!url.trim()) return;
-  localStorage.setItem('po_qr_url',url.trim());
+  localStorage.setItem('po_qr_url','https://nbarbiero1986-hash.github.io/lunaris/');//url.trim());
   genQR(url.trim());
   validateQRUrl(url.trim());
   showToast('QR updated');
