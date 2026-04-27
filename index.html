@@ -922,14 +922,15 @@ html, body {
 @media (max-width: 767px) {
   /* Show hamburger */
   .hbg { display: flex !important; }
+  .tb-logo { font-size: .82rem !important; max-width: calc(100vw - 120px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   /* Hide desktop nav and bottom bar completely */
   .tb-nav { display: none !important; }
   .mob-nav { display: none !important; }
   /* Hide topbar extras */
   .tb-sep, .tb-date, .tb-role,
-  .tb-pdf, .tb-theme-btn { display: none !important; }
-  /* Prevent any horizontal overflow */
-  .topbar { overflow: hidden; }
+  .tb-pdf, .tb-theme-btn, .tb-out { display: none !important; }
+  /* Topbar: never clip hamburger */
+  .topbar { overflow: visible; }
   .ct {
     padding-left: .85rem !important;
     padding-right: .85rem !important;
