@@ -937,7 +937,7 @@ body::before {
     <div class="ov-total" id="ov-grand-total">—</div>
     <div class="ov-sub" id="ov-sub">—</div>
     <div class="ov-live"><span class="dot-live"></span><span id="lupd"></span></div>
-    <button onclick="exportOverviewPDF()" style="position:absolute;top:.6rem;right:.6rem;background:rgba(201,168,76,.12);border:1px solid #c9a84c;color:#c9a84c;font-size:.68rem;padding:.35rem .85rem;cursor:pointer;letter-spacing:.06em;font-family:monospace">&#8659; EXPORT PDF</button>
+    <button onclick="exportOverviewPDF()" class="ov-export-btn">&#8659; EXPORT</button>
   </div>
   <div class="ov-pillars">
     <div class="ov-pill" onclick="showPg('mandates',document.querySelector('[onclick*=mandates]'))">
@@ -1695,9 +1695,27 @@ body.is-admin .drw-i.ao { display:flex; }
   }
 }
 
-/* ── Hamburger: hidden desktop, visible mobile ── */
-@media (min-width: 769px) { .hbg { display: none !important; } }
-@media (max-width: 768px) { .hbg { display: flex !important; } }
+/* ── Hamburger button: only visible on mobile ── */
+@media (max-width: 768px) {
+  .hbg { display: flex !important; }
+}
+
+/* ── Overview export button ── */
+.ov-export-btn {
+  position: absolute; top: .6rem; right: .6rem;
+  background: rgba(201,168,76,.12); border: 1px solid #c9a84c;
+  color: #c9a84c; font-size: .68rem; padding: .35rem .85rem;
+  cursor: pointer; letter-spacing: .06em; font-family: monospace;
+}
+@media (max-width: 768px) {
+  .ov-export-btn {
+    position: static;
+    display: block;
+    width: 100%;
+    margin-top: .75rem;
+    text-align: center;
+  }
+}
 </style>
 
   <div class="sl">Structure &amp; Organisation</div>
