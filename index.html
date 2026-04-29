@@ -748,6 +748,7 @@ body::before {
 [data-theme=dark] .cc{background:#0b0b0b}
 /* Hamburger */
 .hbg{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:0;background:transparent;border:1px solid rgba(201,168,76,.3);cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent}
+@media(max-width:768px){.hbg{display:flex!important}}
 .hbg span{display:block;width:16px;height:1.5px;margin:0 auto;background:#c8bfac;transition:all .25s}
 .hbg.open span:nth-child(1){transform:translateY(6px) rotate(45deg);background:#d4b96a}
 .hbg.open span:nth-child(2){opacity:0}
@@ -923,7 +924,7 @@ body::before {
   <button class="tb-theme-btn" onclick="toggleTheme()" title="Switch theme">&#9681;</button>
   <button class="tb-out" onclick="showModSel()">&#x2B21;</button>
   <button class="tb-out" onclick="doLogout()">exit</button>
-  <button class="hbg" id="hbg" onclick="drwOpen()" aria-label="Menu" style="display:flex!important"><span></span><span></span><span></span></button>
+  <button class="hbg" id="hbg" onclick="drwOpen()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="ct" id="main-ct">
@@ -2380,15 +2381,6 @@ body.is-admin .drw-i.ao { display:flex; }
 </div>
 
 <script>
-// Hamburger visibility — inline style beats CSS conflicts
-function updateHbgVisibility(){
-  var btn = document.getElementById('hbg');
-  if(!btn) return;
-  btn.style.display = window.innerWidth <= 768 ? 'flex' : 'none';
-}
-window.addEventListener('resize', updateHbgVisibility);
-// Run after app loads
-var _origInitApp = typeof initApp === 'function' ? initApp : null;
 
 // ── MOBILE NAV ────────────────────────────────────────
 function initMobNav(){
@@ -2844,7 +2836,7 @@ function enterMod(mod){
   document.getElementById('tb-mod').textContent=modNames[mod]||'All Portfolios';
   document.getElementById('tb-role').textContent=isAdmin()?'Admin':'Viewer';
   document.getElementById('tb-role').className='tb-role '+(isAdmin()?'admin':'viewer');
-  initApp(); setTimeout(updateHbgVisibility, 50);
+  initApp();
 
   // Determine landing page: use mod map, or first allowed page
   var pageMap={mandates:'mandates',realestate:'assets-pg',cash:'cash-pg',
@@ -3475,9 +3467,8 @@ document.addEventListener('click',e=>{if(e.target.classList.contains('mbg'))e.ta
 ['dport','dbench'].forEach(id=>{const z=document.getElementById(id);if(!z)return;z.addEventListener('dragover',e=>{e.preventDefault();z.classList.add('drag');});z.addEventListener('dragleave',()=>z.classList.remove('drag'));z.addEventListener('drop',e=>{e.preventDefault();z.classList.remove('drag');const f=e.dataTransfer.files[0];if(f)procFile(f,id==='dport'?'port':'bench');});});
 
 // ══ BOOT ══
+document.addEventListener('DOMContentLoaded', function(){
 loadSes();
-document.addEventListener('DOMContentLoaded',()=>{
-  initPWA();
   if(SES){
     document.getElementById('login-wrap').style.display='none';
     showModSelScreen();
