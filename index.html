@@ -5089,7 +5089,30 @@ function renderFnSchedule(){
   _renderFnTable(sel.value);
 }
 
-function drwOpen(){var d=document.getElementById('drw'),o=document.getElementById('drw-ov'),b=document.getElementById('hbg');if(!d)return;d.classList.add('show');if(o)o.classList.add('show');if(b)b.classList.add('open');document.body.style.overflow='hidden';var u=document.getElementById('drw-user');if(u&&typeof SES!=='undefined'&&SES)u.textContent=(SES.n||SES.u)+' \u00b7 '+(SES.role||'');}
+function drwOpen(){
+  var d=document.getElementById('drw'),o=document.getElementById('drw-ov'),b=document.getElementById('hbg');
+  if(!d)return;
+  d.classList.add('show');
+  if(o)o.classList.add('show');
+  if(b)b.classList.add('open');
+  document.body.style.overflow='hidden';
+  var u=document.getElementById('drw-user');
+  if(u&&typeof SES!=='undefined'&&SES)u.textContent=(SES.n||SES.u)+' · '+(SES.role||'');
+  // Mostra solo le sezioni permesse per questo utente
+  var pages=typeof getVisiblePages==='function'?getVisiblePages():null;
+  var btns=d.querySelectorAll('button[onclick]');
+  btns.forEach(function(btn){
+    var oc=btn.getAttribute('onclick')||'';
+    var m=oc.match(/drwNav\('([^']+)'\)/);
+    if(!m) return; // non e' un bottone di navigazione
+    var pageId=m[1];
+    if(pages===null){
+      btn.style.display='flex'; // admin: tutto visibile
+    } else {
+      btn.style.display=pages.indexOf(pageId)>=0?'flex':'none';
+    }
+  });
+}
 function drwClose(){var d=document.getElementById('drw'),o=document.getElementById('drw-ov'),b=document.getElementById('hbg');if(d)d.classList.remove('show');if(o)o.classList.remove('show');if(b)b.classList.remove('open');document.body.style.overflow='';}
 function drwGo(el){var pg=el.dataset.pg;if(!pg)return;document.querySelectorAll('.drw-i').forEach(function(i){i.classList.remove('act');});el.classList.add('act');showPg(pg,document.querySelector('.nb[onclick*="'+pg+'"]')||el);drwClose();}
 function emergencyReset(){if(confirm('Reset credentials?\n\nadmin / Admin2024!\nviewer1 / View2024!')){localStorage.removeItem('po_users');localStorage.removeItem('po_ses');localStorage.removeItem('po_ver');window.location.reload();}}
