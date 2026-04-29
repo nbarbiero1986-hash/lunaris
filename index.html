@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark" style="background:#050505;color:#f0ebe0">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1659,7 +1659,23 @@ body::before {
     .oc-legend{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem;padding:.75rem 1rem;background:var(--s1);border:1px solid var(--bdrS)}
     .oc-leg-item{display:flex;align-items:center;gap:.5rem;font-size:.68rem;color:var(--silver2)}
     .oc-leg-dot{width:12px;height:12px;border-radius:2px;flex-shrink:0}
-  </style>
+  
+/* ── Anti-zoom iOS: force font-size >= 16px on all inputs ── */
+@media (max-width: 768px) {
+  input, select, textarea, .fsel {
+    font-size: 16px !important;
+    transform: scale(1);
+  }
+}
+
+/* ── Mobile Drawer ── */
+.drw-i { display:flex; align-items:center; width:100%; padding:.7rem 1.1rem;
+  background:none; border:none; color:var(--silver); font-size:.82rem;
+  cursor:pointer; text-align:left; transition:background .15s; }
+.drw-i:hover, .drw-i:active { background:rgba(201,168,76,.08); color:var(--wh); }
+.drw-i.ao { display:none; }
+body.is-admin .drw-i.ao { display:flex; }
+</style>
 
   <div class="sl">Structure &amp; Organisation</div>
 
@@ -8394,6 +8410,13 @@ function exportExecutiveSummary(){
   document.body.appendChild(a);a.click();
   setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
   showToast('Executive Summary downloaded \u2713');
+}
+
+function drwNav(pageId){
+  drwClose();
+  var btn = Array.prototype.slice.call(document.querySelectorAll('.nb'))
+    .find(function(b){ return (b.getAttribute('onclick')||'').indexOf(pageId) >= 0; });
+  showPg(pageId, btn||null);
 }
 </script>
 </body>
